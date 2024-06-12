@@ -39,6 +39,11 @@ fi
 echo -e "\nStep 1/3: Deploying MicroK8s snap"
 sudo snap install microk8s --classic --channel=1.29/stable
 
+# Allows the script to use the NORMAL_USER variable in checkbox
+if [ -z "$USER" ]; then
+  USER=${NORMAL_USER}
+fi
+
 sudo usermod -a -G microk8s $USER
 sudo mkdir -p $HOME/.kube
 sudo mkdir -p $HOME/.local/share
